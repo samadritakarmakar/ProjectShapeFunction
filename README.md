@@ -55,5 +55,7 @@ Quadrilateral Shape Functions have been tested upto and order of 9. Any higher o
 
 ## AND NOW TIME FOR PICTURES!!
 ![alt tag](https://github.com/samadritakarmakar/ProjectShapeFunction/blob/master/Pics/Quad/CollageQuad.png)
+A Quadrilateral of Order 2  
 
-
+![alt tag](https://github.com/samadritakarmakar/ProjectShapeFunction/blob/master/Pics/Tri/CollageTri.png)
+A Triangle of Order 2  
