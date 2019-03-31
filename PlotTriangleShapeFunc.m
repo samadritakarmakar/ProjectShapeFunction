@@ -17,7 +17,7 @@
 %This part of the code is responsible to gernerate the points within x[0,1] & y[0,1]
 clear;
 close all;
-order=3
+order=2
 CoeffMatrix=FindCoeffTriangle(order);
 x=0:.0125:1;
 y=x;

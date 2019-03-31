@@ -17,7 +17,7 @@
 %This part of the code is responsible to gernerate the points within x[-1,1] & y[-1,1]
 clear;
 close all;
-order=7
+order=2
 CoeffMatrix=FindCoeffQuad(order);
 x=-1:.0125:1;
 y=x;
