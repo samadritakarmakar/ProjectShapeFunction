@@ -54,6 +54,6 @@ Triangle Shape Functions work upto an order of 10.
 Quadrilateral Shape Functions have been tested upto and order of 9. Any higher order could not be tested due to hardware limitations.  
 
 ## AND NOW TIME FOR PICTURES!!
-![alt tag](https://github.com/samadritakarmakar/ProjectShapeFunction/blob/master/Pics/Quad/CollageQuad.png =800X600)
+![alt tag](https://github.com/samadritakarmakar/ProjectShapeFunction/blob/master/Pics/Quad/CollageQuad.png)
 
 
