@@ -14,21 +14,17 @@
 %    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%This part of the code is responsible to gernerate the points within x[0,1] & y[0,1]
-clear
-order=2
-CoeffMatrix=FindCoeffTriangle(order);
-x=0:.05:1;
-y=x;
-z=zeros(length(y),length(x));
-NumOfNodes=NumOfTriNodes(order);
-
-for j=1:NumOfNodes    
-    for i=1:length(x)
-        Mat=BuildTriangleMatrix(order, x(i)*ones(length(y),1), y', NumOfNodes);
-        z(:,i)=Mat*CoeffMatrix(j,:)';
-        z(end-(i-2):end,i)=nan; %Clearing up data not part of the triangle.
+function Mat=BuildQuadMatrix(order, x, y, NumOfNodes)
+lengthx=length(x);
+Mat=zeros(lengthx, NumOfNodes);
+Mat(:,1)=ones(lengthx,1);
+pos=2;
+for i=1:order
+Mat(:,pos)=x.^i; %Builds x; x^2;... etc
+Mat(:,pos+1)=y.^i; %Builds y; y^2;... etc
+pos=pos+2;
+    for j=1:order
+        Mat(:,pos)=x.^i.*y.^j; %Builds xy; xy, xy^2, x^2y, x^2y^2;.. etc
+        pos=pos+1;
     end
-    figure;
-    surf(x,y,z);
 end

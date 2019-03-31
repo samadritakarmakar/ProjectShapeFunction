@@ -9,7 +9,7 @@
 %To use the resulting coefficients you may do the following.
 %Step 1: Determine the points x & y you want to find the shape functions for.
 %Step 2: Determine the order of the shape function.
-%Step 3: Call function "Mat=BuildTriangleMatrix(order, x, y, NumOfNodes)"
+%Step 3: Call function "Mat=Build<Triangle, Quad, etc>Matrix(order, x, y, NumOfNodes)"
 %Step 4: Multiply Mat with Transpose(CoeffMatrix) as ,  N=Mat*CoeffMatrix'
 %N(1,1), N(1,2), N(1,3), ... with represent the different shape functions 
 %If COLUMN vectors are passed in x and y then N(:,1), N(:,2), N(:,3), ... will
