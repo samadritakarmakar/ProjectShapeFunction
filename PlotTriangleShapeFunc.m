@@ -30,7 +30,9 @@ for j=1:NumOfNodes
         z(:,i)=Mat*CoeffMatrix(j,:)';
         z(end-(i-2):end,i)=nan; %Clearing up data not part of the triangle.
     end
-    figure(j+1);
-    m=surf(x,y,z);
-    set(m,'edgecolor','none');
+    m=figure;
+    n=surf(x,y,z);
+    set(n,'edgecolor','none');
+    name=['Pics/Tri/Tri' num2str(j) '.png']; %Used to save the generated plot. Do not use in not needed and for high orders 
+    print(m, name, '-dpng')
 end

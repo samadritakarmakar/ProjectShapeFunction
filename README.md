@@ -36,9 +36,9 @@ N(1,1), N(1,2), N(1,3), ... with represent the different shape functions.
 If COLUMN vectors are passed in x and y then N(:,1), N(:,2), N(:,3), ... will
 represent the different shape functions.  
 
-Note:
-Eg. Coeff(1,:) gives the set of Coefficients of node 1. 
-Eg. Coeff(2,:) gives the set of Coefficients of node 2.
+Note:  
+Coeff(1,:) gives the set of Coefficients of node 1.  
+Coeff(2,:) gives the set of Coefficients of node 2.  
 
 ## Instructions for Plotting Shape Functions
 
@@ -46,7 +46,7 @@ To Generate Shape Function Plots you may do the following.
 Step 1: Open the file 'Plot<Triangle, Quad, etc..>ShapeFunc.m'.  
 Step 2: Set the line  
             order=3
-to order of your choice and run the script.
+to order of your choice and run the script.  
 
 ## Issues
 

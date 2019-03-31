@@ -29,7 +29,9 @@ for j=1:NumOfNodes
         Mat=BuildQuadMatrix(order, x(i)*ones(length(y),1), y', NumOfNodes);
         z(:,i)=Mat*CoeffMatrix(j,:)';
     end
-    figure(j+1);
-    m=surf(x,y,z);
-    set(m,'edgecolor','none');
+    m=figure;
+    n=surf(x,y,z);
+    set(n,'edgecolor','none');
+    %name=['Pics/Quad/Quad' num2str(j) '.png']; %Used to save the generated plot. Do not use in not needed and for high orders 
+    %print(m, name, '-dpng')
 end
