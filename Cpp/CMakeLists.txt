@@ -12,9 +12,9 @@ add_subdirectory(libGmshReader/GmshApi/)
 
 set (PreInstalled armadillo blas lapack)
 
-set (InternalDev "GmshNodeListGen.h")
+set (InternalDev GmshNodeListGen.h cof.hpp BuildTriangleMatrix.hpp  FindCoeffTriangle.hpp NumOfTriNodes.hpp)
 
-add_executable(${PROJECT_NAME} "main.cpp" ${InternalDev})
+add_executable(${PROJECT_NAME} main.cpp ${InternalDev})
 target_link_libraries (${PROJECT_NAME} ${PreInstalled}  ${CMAKE_SOURCE_DIR}/libGmshReader/GmshApi/libgmsh.a)
 
 set (COPY_FILES BaseGeom)
