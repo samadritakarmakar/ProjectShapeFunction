@@ -12,7 +12,11 @@ add_subdirectory(libGmshReader/GmshApi/)
 
 set (PreInstalled armadillo blas lapack)
 
-set (InternalDev GmshNodeListGen.h cof.hpp BuildTriangleMatrix.hpp  FindCoeffTriangle.hpp NumOfTriNodes.hpp)
+set (InternalDev GmshNodeListGen.h cof.hpp
+    BuildTriangleMatrix.hpp FindCoeffTriangle.hpp NumOfTriNodes.hpp
+    FindCoeffQuad.hpp NumOfQuadNodes.hpp BuildQuadMatrix.hpp
+    BuildHexahedralMatrix.hpp FindCoeffHexahedral.hpp NumOfHexaNodes.hpp
+    BuildTetrahedralMatrix.hpp FindCoeffTertrahedral.hpp NumOfTetraNodes.hpp)
 
 add_executable(${PROJECT_NAME} main.cpp ${InternalDev})
 target_link_libraries (${PROJECT_NAME} ${PreInstalled}  ${CMAKE_SOURCE_DIR}/libGmshReader/GmshApi/libgmsh.a)

@@ -9,9 +9,17 @@ using namespace arma;
 
 void GetNodeList_4_1_Element(const std::string &FolderName, const std::string &FileName,
                              const int &order, const int &dim, mat &NodeList);
+
+/// Returns the List of Nodes for a complete Triangle
 mat GmshNodeListTriangle(int order);
+
+/// Returns the List of Nodes for a complete Quadrilateral
 mat GmshNodeListQuadrilateral(int order);
+
+/// Returns the List of Nodes for a complete Tetrahedral
 mat GmshNodeListTetrahedral(int order);
+
+/// Returns the List of Nodes for a complete Hexahedral
 mat GmshNodeListHexahedral(int order);
 
 mat GmshNodeListTriangle(int order)
@@ -55,6 +63,8 @@ mat GmshNodeListHexahedral(int order)
     return NodeList;
 }
 
+/// Returns Node List for a given NodeList. WARNING! Internal function. Only to be used
+/// to get NodeList only over one element.
 void GetNodeList_4_1_Element(const std::string &FolderName, const std::string &FileName,
                              const int &order, const int &dim, mat &NodeList)
 {

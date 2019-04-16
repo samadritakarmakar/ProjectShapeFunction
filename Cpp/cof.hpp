@@ -5,8 +5,8 @@
 
 #include <armadillo>
 using namespace arma ;
-
-mat cof(mat matrix)
+/// Returns the cofator of a matrix. Accepts the reqd. matrix as input.
+inline mat cof(mat matrix)
 {
 
   int r = matrix.n_rows;
@@ -14,26 +14,26 @@ mat cof(mat matrix)
   int i,j;
   mat matrx  = arma::zeros<mat>(r-1, c-1) ;
   mat cofactors = arma::zeros<mat>(r, c) ;
-  //Left topmost Corner of matrix
+  // Left topmost Corner of matrix
   i=0; j=0;
   matrx =matrix(span(i+1,r-1),span(j+1,c-1));
   cofactors(i, j) = det(matrx)*pow((-1), (i+j));
 
-  //Right topmost Corner of matrix
+  // Right topmost Corner of matrix
   i=0; j=c-1;
   matrx=matrix(span(i+1,r-1),span(0,j-1));
   cofactors(i, j) = det(matrx)*pow((-1), (i+j));
 
-  //Bottom leftmost corner
+  // Bottom leftmost corner
   i=r-1; j=0;
   matrx = matrix(span(0,i-1),span(j+1,c-1));
   cofactors(i, j) = det(matrx)*pow((-1), (i+j));
-  //Bottom rightmost corner
+  // Bottom rightmost corner
   i=r-1; j=c-1;
   matrx=matrix(span(0,i-1),span(0,j-1));
   cofactors(i, j) = det(matrx)*pow((-1), (i+j));
 
-  //Topmost and bottom most row of other than  the corners
+  // Topmost and bottom most row of other than  the corners
   for (j=1; j<c-1; j++)
   {
       i=0;
@@ -44,7 +44,7 @@ mat cof(mat matrix)
       cofactors(i, j) = det(matrx)*pow((-1), (i+j));
   }
 
-  //Leftmost and Rightmost columns other than the corners
+  // Leftmost and Rightmost columns other than the corners
   for (i=1; i<r-1; i++)
   {
       j=0;
