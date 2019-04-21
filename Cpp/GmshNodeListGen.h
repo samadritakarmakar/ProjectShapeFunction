@@ -22,6 +22,9 @@ mat GmshNodeListTetrahedral(int order);
 /// Returns the List of Nodes for a complete Hexahedral
 mat GmshNodeListHexahedral(int order);
 
+/// Returns the List of Nodes for a Line
+mat GmshNodeListLine(int order);
+
 mat GmshNodeListTriangle(int order)
 {
 
@@ -58,6 +61,17 @@ mat GmshNodeListHexahedral(int order)
     int dim=3;
     std::string FolderName="BaseGeom/";
     std::string FileName="Hexahedral";
+    mat NodeList;
+    GetNodeList_4_1_Element(FolderName, FileName, order, dim, NodeList);
+    return NodeList;
+}
+
+mat GmshNodeListLine(int order)
+{
+
+    int dim=1;
+    std::string FolderName="BaseGeom/";
+    std::string FileName="Line";
     mat NodeList;
     GetNodeList_4_1_Element(FolderName, FileName, order, dim, NodeList);
     return NodeList;

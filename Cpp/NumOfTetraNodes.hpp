@@ -6,6 +6,7 @@
 int NumOfTetraNodes(int order)
 {
   int NumOfNodes ;
+   //(n(n+1)(2n+1)/6 + 3n(n+1) + 2n)/2 where n=order
   NumOfNodes = (order*(order+1)*(2*order+1))/12+3*(order*(order+1))/4+order+1 ;
   return NumOfNodes ;
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(GmshNodeListGen)
+project(ProjectShapeFunction)
 
 set(CMAKE_CXX_FLAGS "-O3")
 find_package(Armadillo REQUIRED)
@@ -16,7 +16,8 @@ set (InternalDev GmshNodeListGen.h cof.hpp
     BuildTriangleMatrix.hpp FindCoeffTriangle.hpp NumOfTriNodes.hpp
     FindCoeffQuad.hpp NumOfQuadNodes.hpp BuildQuadMatrix.hpp
     BuildHexahedralMatrix.hpp FindCoeffHexahedral.hpp NumOfHexaNodes.hpp
-    BuildTetrahedralMatrix.hpp FindCoeffTertrahedral.hpp NumOfTetraNodes.hpp)
+    BuildTetrahedralMatrix.hpp FindCoeffTertrahedral.hpp NumOfTetraNodes.hpp
+    BuildLineMatrix.hpp FindCoeffLine.hpp NumOfLineNodes.hpp)
 
 add_executable(${PROJECT_NAME} main.cpp ${InternalDev})
 target_link_libraries (${PROJECT_NAME} ${PreInstalled}  ${CMAKE_SOURCE_DIR}/libGmshReader/GmshApi/libgmsh.a)
