@@ -1,11 +1,12 @@
-#ifndef FINDCOEFFTERTRAHEDRAL_HPP
-#define FINDCOEFFTERTRAHEDRAL_HPP
+#ifndef FINDCOEFFHEXAHEDRAL_HPP
+#define FINDCOEFFHEXAHEDRAL_HPP
 
 #include <armadillo>
 #include "GmshNodeListGen.h"
-#include "NumOfTetraNodes.hpp"
-#include "BuildTetrahedralMatrix.hpp"
+#include "NumOfHexaNodes.hpp"
+#include "BuildHexahedralMatrix.hpp"
 #include "cof.hpp"
+#include "CheckSupportedOrder.hpp"
 
 using namespace arma;
 
@@ -25,16 +26,17 @@ using namespace arma;
 mat FindCoeffHexadedral(int order)
 {
   mat CoeffMatrix, CofMatrix, Mat, NodeList, x, y, z ;
-
-  NodeList = GmshNodeListTetrahedral(order) ;
+  int orderLimit=4;
+  CheckSupportedOrder(order, orderLimit);
+  NodeList = GmshNodeListHexahedral(order) ;
   x = NodeList.col(0) ;
   y = NodeList.col(1) ;
   z = NodeList.col(2) ;
-  int NumOfNodes = NumOfTetraNodes(order) ;
-
-  BuildTetrahedralMatrix(order, x, y, z, NumOfNodes, Mat) ;
+  int NumOfNodes = NumOfHexaNodes(order) ;
+  BuildHexahedralMatrix(order, x, y, z, NumOfNodes, Mat) ;
   CofMatrix = cof(Mat) ;
   CoeffMatrix = speye(NumOfNodes,NumOfNodes)*cof(Mat)/det(Mat) ;
   return CoeffMatrix ;
 }
-#endif // FINDCOEFFTERTRAHEDRAL_HPP
+
+#endif // FINDCOEFFHEXAHEDRAL_HPP

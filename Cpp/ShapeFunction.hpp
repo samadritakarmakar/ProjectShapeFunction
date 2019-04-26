@@ -1,0 +1,4 @@
+#ifndef SHAPEFUNCTION_H
+#define SHAPEFUNCTION_H
+
+#endif // SHAPEFUNCTION_H

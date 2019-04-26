@@ -1,10 +1,14 @@
-#ifndef FINDCOEFFLINE_HPP
-#define FINDCOEFFLINE_HPP
+// Automatically translated using m2cpp 2.0 on 2019-04-13 23:38:41
+
+#ifndef FINDCOEFFQUAD_M_HPP
+#define FINDCOEFFQUAD_M_HPP
+
 #include "GmshNodeListGen.h"
+#include "NumOfQuadNodes.hpp"
+#include "BuildQuadMatrix.hpp"
 #include "cof.hpp"
-#include "BuildLineMatrix.hpp"
-#include "NumOfLineNodes.hpp"
 #include <armadillo>
+#include "CheckSupportedOrder.hpp"
 using namespace arma ;
 
 /// This code calculates the coefficients for each node equation
@@ -20,17 +24,18 @@ using namespace arma ;
 /// If COLUMN vectors are passed in x and y then N(:,1), N(:,2), N(:,3), ... will
 /// represent the different shape functions at different values of x and y.
 
-mat FindCoeffLine(int order)
+mat FindCoeffQuad(int order)
 {
-  mat CoeffMatrix, CofMatrix, Mat, x ;
-  int NumOfNodes;
-  mat NodeList = GmshNodeListLine(order) ;
+  mat CoeffMatrix, CofMatrix, Mat, NodeList, x, y ;
+  int orderLimit=9;
+  CheckSupportedOrder(order, orderLimit);
+  NodeList = GmshNodeListQuadrilateral(order) ;
   x = NodeList.col(0) ;
-  NumOfNodes = NumOfLineNodes(order) ;
-  //std::cout<<"Num of Line Nodes"<<NumOfNodes<<"\n";
-  BuildLineMatrix(order, x, NumOfNodes, Mat) ;
+  y = NodeList.col(1) ;
+  int NumOfNodes = NumOfQuadNodes(order) ;
+  BuildQuadMatrix(order, x, y, NumOfNodes, Mat) ;
   CofMatrix = cof(Mat) ;
   CoeffMatrix = speye(NumOfNodes,NumOfNodes)*cof(Mat)/det(Mat) ;
   return CoeffMatrix ;
 }
-#endif // FINDCOEFFLINE_HPP
+#endif

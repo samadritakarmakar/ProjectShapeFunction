@@ -1,13 +1,14 @@
-#ifndef FINDCOEFFHEXAHEDRAL_HPP
-#define FINDCOEFFHEXAHEDRAL_HPP
+// Automatically translated using m2cpp 2.0 on 2019-04-11 23:33:14
 
-#include <armadillo>
+#ifndef FINDCOEFFTRIANGLE_M_HPP
+#define FINDCOEFFTRIANGLE_M_HPP
 #include "GmshNodeListGen.h"
-#include "NumOfHexaNodes.hpp"
-#include "BuildHexahedralMatrix.hpp"
 #include "cof.hpp"
-
-using namespace arma;
+#include "BuildTriangleMatrix.hpp"
+#include "NumOfTriNodes.hpp"
+#include "CheckSupportedOrder.hpp"
+#include <armadillo>
+using namespace arma ;
 
 /// This code calculates the coefficients for each node equation
 /// Eg. Coeff(1,:) gives the set of Coefficients of node 1.
@@ -22,19 +23,19 @@ using namespace arma;
 /// If COLUMN vectors are passed in x and y then N(:,1), N(:,2), N(:,3), ... will
 /// represent the different shape functions at different values of x and y.
 
-mat FindCoeffHexadedral(int order)
+mat FindCoeffTriangle(int order)
 {
-  mat CoeffMatrix, CofMatrix, Mat, NodeList, x, y, z ;
-
-  NodeList = GmshNodeListHexahedral(order) ;
+  mat CoeffMatrix, CofMatrix, Mat, NodeList, x, y ;
+  int NumOfNodes;
+  int orderLimit=9;
+  CheckSupportedOrder(order, orderLimit);
+  NodeList = GmshNodeListTriangle(order) ;
   x = NodeList.col(0) ;
   y = NodeList.col(1) ;
-  z = NodeList.col(2) ;
-  int NumOfNodes = NumOfHexaNodes(order) ;
-  BuildHexahedralMatrix(order, x, y, z, NumOfNodes, Mat) ;
+  NumOfNodes = NumOfTriNodes(order) ;
+  BuildTriangleMatrix(order, x, y, NumOfNodes, Mat) ;
   CofMatrix = cof(Mat) ;
   CoeffMatrix = speye(NumOfNodes,NumOfNodes)*cof(Mat)/det(Mat) ;
   return CoeffMatrix ;
 }
-
-#endif // FINDCOEFFHEXAHEDRAL_HPP
+#endif
