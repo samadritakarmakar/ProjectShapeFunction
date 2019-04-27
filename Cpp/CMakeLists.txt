@@ -22,7 +22,7 @@ add_subdirectory(ShapeFunction/LagrangeShapeFunction/)
 
 set (PreInstalled armadillo blas lapack)
 
-set (InternalDev ShapeFunction.hpp)
+set (InternalDev ShapeFunction.hpp ShapeFunctionAllElementTypes.hpp)
 
 set (PreDev libGmshReader GmshApi LagrangeShapeFunction)
 

@@ -99,6 +99,16 @@ void libGmshReader::ElementData::GetElementData()
         return 0;
     }*/
 }
+
+void libGmshReader::ElementData::GetGmshElementNameOnly()
+{
+    for (int ElementType=0; ElementType<NumOfElementTypes; ElementType++)
+    {
+        int PosOfSpace= GmshElementName[ElementType].find_first_of(' ');
+        GmshElementNameOnly[ElementType]=GmshElementName[ElementType].substr(0,PosOfSpace);
+    }
+}
+
 void libGmshReader::MeshReader::setElementNodes()
 {
     if (success)

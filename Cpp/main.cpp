@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cof.hpp"
+/*#include "cof.hpp"
 #include "GmshNodeListGen.h"
 #include <armadillo>
 #include "FindCoeffTriangle.hpp"
@@ -9,6 +9,9 @@
 #include "FindCoeffTertrahedral.hpp"
 #include <string>
 #include "libGmshReader.h"
+#include "ShapeFunction.hpp"
+*/
+#include "ShapeFunctionAllElementTypes.hpp"
 using namespace arma;
 int main(int argc, char *argv[])
 {
@@ -19,11 +22,11 @@ int main(int argc, char *argv[])
     //mat A;
     //A << 1 << 2 << 1<< 5 <<endr << 3 << 4 << 3<< 2 <<endr<<5 <<6 <<7<< 4 <<endr<< 4 << 3 << 2 << 9<<endr;
     //std::cout<<cof(A);
-    int order =1;
+    //int order =1;
     //mat NodeList=GmshNodeListTriangle(order);
     //mat Mat;
     //BuildTriangleMatrix(order,NodeList.col(0),NodeList.col(1),NodeList.col(0).n_rows, Mat);
-    //cout<<Mat*FindCoeffTriangle(order).t();*/
+    //cout<<Mat*FindCoeffTriangle(order).t();
     //mat NodeList2=GmshNodeListQuadrilateral(order);
     //mat Mat2;
     //BuildQuadMatrix(order, NodeList2.col(0), NodeList2.col(1), NodeList2.n_rows, Mat2);
@@ -43,15 +46,22 @@ int main(int argc, char *argv[])
     if(argc==1 || argc>3)
     {
         std::cout<<"Usage: ./ProjectShapeFunction <.msh Filename> <Dimension>\n";
+        return 0;
     }
-    else
+    std::string FileName(argv[1]);
+    int Dimension=*argv[2]-'0';
+    //cout<<"File Name= "<<FileName<<"\n";
+    //cout<<"Dimension= "<<Dimension<<"\n";
+    libGmshReader::MeshReader Mesh(FileName, Dimension);
+    ShapeFunctionAllElementTypes trial(Mesh);
+    mat GaussPointx={0};
+    mat GaussPointy={0};
+    mat GaussPointz={0};
+    //cout<<"Element Name= "<<Mesh.GmshElementNameOnly[0]<<"\n";
+    std::vector<mat> N=trial.GetShapeFunction(GaussPointx, GaussPointy);
+    for (int i=0; i<N.size(); i++)
     {
-        std::string FileName(argv[1]);
-        int Dimension=*argv[2]-'0';
-        //cout<<"File Name= "<<FileName<<"\n";
-        //cout<<"Dimension= "<<Dimension<<"\n";
-        libGmshReader::MeshReader Mesh(FileName, Dimension);
-        //cout<<Mesh.NodalCoordinates;
+        cout<<N[i];
     }
     return 0;
 }

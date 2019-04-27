@@ -16,18 +16,21 @@ class ElementData
 {
     public:
     //std::string *Type, *Degree,
-    std::string *GmshElementName;
+    std::string *GmshElementName, *GmshElementNameOnly;
     int *NumOfElementNodes, *order, *NumOfDimension, *GmshElementType, NumOfElementTypes, maxNodeNumber;
     umat *ElementNodes, *ElementTag, *ContainsNodes, *GmshNodeTag;
     std::string fileName;
     bool fileExist;
     int dim;
+protected:
     void GetElementData();
+    /// Allocate the element data as per the number of element types.
     void AllocateElementData()
     {
         //Type=new std::string [NumOfElementTypes];
         //Degree=new std::string [NumOfElementTypes];
         GmshElementName=new std::string [NumOfElementTypes];
+        GmshElementNameOnly =new std::string [NumOfElementTypes];
         NumOfElementNodes =new int [NumOfElementTypes];
         order=new int [NumOfElementTypes];
         NumOfDimension=new int [NumOfElementTypes];
@@ -37,11 +40,13 @@ class ElementData
         ContainsNodes=new umat [NumOfElementTypes];
         GmshNodeTag=new umat[NumOfElementTypes];
     }
+    /// Delete Element data
     void DeleteElementData()
     {
         //delete []Type;
         //delete []Degree;
         delete []GmshElementName;
+        delete []GmshElementNameOnly;
         delete []NumOfElementNodes;
         delete []order;
         delete []NumOfDimension;
@@ -50,7 +55,8 @@ class ElementData
         delete []ContainsNodes;
         delete []GmshNodeTag;
     }
-
+    /// Extract just the element name and remove the number of nodes from it.
+    void GetGmshElementNameOnly();
 };
 class NodeData
 {
@@ -61,6 +67,8 @@ public:
     std::string fileName;
     bool fileExist;
     int dim;
+protected:
+    ///Extract node Data
     void GetNodeData();
 
 };
@@ -96,6 +104,8 @@ public:
         GetNodeData();
         ///Extracts Element data from Mesh file
         GetElementData();
+        /// Extract just the element name and remove the number of nodes from it.
+        GetGmshElementNameOnly();
         ///Sets the variable ElementNodes Mesh file
         setElementNodes();
         FindMaxNodeNumber();
